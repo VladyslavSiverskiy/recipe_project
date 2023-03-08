@@ -2,17 +2,12 @@ package com.example.recipes_api.controllers;
 
 import com.example.recipes_api.dto.IdResponse;
 import com.example.recipes_api.dto.RecipeDTO;
-import com.example.recipes_api.entity.Recipe;
 import com.example.recipes_api.exceptions.NoSuchRecipeException;
 import com.example.recipes_api.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.NETWORK_AUTHENTICATION_REQUIRED;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("/api")
@@ -44,12 +39,7 @@ public class RecipesController {
     }
 
     @PostMapping("/recipe")
-    public IdResponse addRecipe(@RequestBody RecipeDTO recipeDTO){
-        Integer id = recipeService.addRecipe(recipeDTO);
-        IdResponse response = new IdResponse();
-        response.setId(id);
-        return response;
+    public RecipeDTO addRecipe(@RequestBody RecipeDTO recipeDTO){
+        return recipeService.addRecipe(recipeDTO);
     }
-
-
 }

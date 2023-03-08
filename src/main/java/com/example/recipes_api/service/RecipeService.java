@@ -23,6 +23,7 @@ public class RecipeService {
         List<Recipe> recipes = recipeRepository.findAll();
         for (Recipe recipe : recipes) {
             RecipeDTO recipeDTO = new RecipeDTO(
+                    recipe.getId(),
                     recipe.getName(),
                     recipe.getDescription(),
                     recipe.getIngredients(),
@@ -39,6 +40,7 @@ public class RecipeService {
         if(recipeOptional.isPresent()){
             Recipe recipe = recipeOptional.get();
             recipeDTO = new RecipeDTO(
+                    recipe.getId(),
                     recipe.getName(),
                     recipe.getDescription(),
                     recipe.getIngredients(),
@@ -49,7 +51,7 @@ public class RecipeService {
         return recipeDTO;
     }
 
-    public Integer addRecipe(RecipeDTO recipeDTO) {
+    public RecipeDTO addRecipe(RecipeDTO recipeDTO) {
         System.out.println("RECIPE DTO: " + recipeDTO);
         Recipe recipe = new Recipe();
         recipe.setName(recipeDTO.getName());
@@ -58,7 +60,8 @@ public class RecipeService {
         recipe.addDirections(recipeDTO.getDirections());
         System.out.println("RECIPE: " + recipe);
         recipeRepository.save(recipe);
-        return recipe.getId();
+        recipeDTO.setId(recipe.getId());
+        return recipeDTO;
     }
 
     public boolean deleteRecipeById(int id){

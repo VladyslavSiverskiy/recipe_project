@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RecipeDTO {
 
+    private int id;
     private String name;
     private String description;
     private List<String> ingredients;
