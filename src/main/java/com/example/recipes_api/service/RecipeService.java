@@ -60,4 +60,13 @@ public class RecipeService {
         recipeRepository.save(recipe);
         return recipe.getId();
     }
+
+    public boolean deleteRecipeById(int id){
+        try {
+            recipeRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

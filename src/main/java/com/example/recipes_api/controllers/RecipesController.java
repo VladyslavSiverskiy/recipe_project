@@ -35,6 +35,14 @@ public class RecipesController {
         return recipeDTO;
     }
 
+    @DeleteMapping("/recipe/{recipeId}")
+    public IdResponse deleteEmployee(@PathVariable int recipeId){
+        recipeService.deleteRecipeById(recipeId);
+        IdResponse response = new IdResponse();
+        response.setId(recipeId);
+        return response;
+    }
+
     @PostMapping("/recipe")
     public IdResponse addRecipe(@RequestBody RecipeDTO recipeDTO){
         Integer id = recipeService.addRecipe(recipeDTO);
@@ -42,4 +50,6 @@ public class RecipesController {
         response.setId(id);
         return response;
     }
+
+
 }
